@@ -1,0 +1,17 @@
+{
+    "name": "Filters",
+    "short_name": "Filters",
+    "description": "Maya chrome extension",
+    "version": "1.0.5",
+    "manifest_version": 2,
+    "author": "Attila Varga <artit91@gmail.com>",
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    },
+    "minimum_chrome_version": "38.0.2125.101",
+    "offline_enabled": true,
+    "permissions": ["videoCapture"],
+    "icons": { "48": "ico48.png" }
+}

@@ -1,0 +1,17 @@
+<div class="webcam">
+    <video class="video {{selected}}" webcam autoplay></video>
+    <div class="filter-cont">
+        <video 
+            ng-class="{selected: selected === filter.name}"
+            class="filter {{filter.name}}"
+            webcam
+            autoplay
+            ng-repeat="filter in filters"
+            ng-click="select(filter.name)"
+        ></video>
+    </div>
+</div>
+<div class="overlay">
+    <span class="overlay-button back ion-ios-arrow-back" ui-sref="selector"></span>
+    <span class="overlay-button photo ion-camera"></span>
+</div>
