@@ -56,8 +56,7 @@
 
     gulp.task('concat:common_js', function () {
         return gulp.src([
-            'vendor/URI/**/*.js',
-            'vendor/moment/**/*.js',
+            'vendor/canvas-to-blob/**/*.js',
             'vendor/angular/**/*.js',
             'vendor/angular-ui-router/**/*.js',
             'app/app.js',

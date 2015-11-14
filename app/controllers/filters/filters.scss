@@ -52,6 +52,9 @@
 		background: black;
 		object-fit: contain;
 		flex-grow: 1;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
 	}
 
 	.filter-cont {
@@ -65,6 +68,9 @@
 		height: calc(300vw / 24);
 		background: black;
 		cursor: pointer;
+		background-size: cover;
+	    background-position: center;
+	    background-repeat: no-repeat;
 		&.selected {
 			border: 0.6666vw solid #bada55;
 		}

@@ -1,5 +1,5 @@
 <div class="webcam">
-    <video class="video {{selected}}" webcam autoplay></video>
+    <video class="video {{selected}}" webcam autoplay ng-model="webcam"></video>
     <div class="filter-cont">
         <video 
             ng-class="{selected: selected === filter.name}"
@@ -8,10 +8,11 @@
             autoplay
             ng-repeat="filter in filters"
             ng-click="select(filter.name)"
+            ng-model="filter"
         ></video>
     </div>
 </div>
 <div class="overlay">
     <span class="overlay-button back ion-ios-arrow-back" ui-sref="selector"></span>
-    <span class="overlay-button photo ion-camera"></span>
+    <span class="overlay-button photo ion-camera" ng-click="photo()"></span>
 </div>
