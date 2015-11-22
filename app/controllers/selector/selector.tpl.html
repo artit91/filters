@@ -1,11 +1,15 @@
 <div class="selector">
-	<div class="selector-item">
+	<div class="selector-item" ng-click="getLocalFile()">
 		<span class="ion-document"><span>
 		File
 	</div>
-	<div class="selector-item" ui-sref="filters({src: 'https://i.vimeocdn.com/video/211205970_640.jpg'})">
+	<div class="selector-item" ng-click="getURL()">
 		<span class="ion-cloud"><span>
 		URL
+	</div>
+	<div class="selector-item" ng-click="getClipboard()">
+		<span class="ion-clipboard"><span>
+		Clipboard
 	</div>
 	<div class="selector-item" ui-sref="filters">
 		<span class="ion-camera"><span>

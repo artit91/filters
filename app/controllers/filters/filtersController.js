@@ -1,12 +1,14 @@
 
 /*jslint browser: true, devel: true*/
-/*global filters */
+/*global filters, swal, escape */
 
-filters.controller('filtersController', ['utils', '$stateParams', '$scope', '$timeout', function (utils, $stateParams, $scope, $timeout) {
+filters.controller('filtersController', ['utils', '$stateParams', '$state', '$scope', '$timeout', function (utils, $stateParams, $state, $scope, $timeout) {
 
     'use strict';
 
     $scope.selected = 'default';
+    $scope.photoTaken = 0;
+    $scope.noCamera = 0;
 
     $scope.webcam = {};
 
@@ -45,6 +47,7 @@ filters.controller('filtersController', ['utils', '$stateParams', '$scope', '$ti
         $scope.webcam.freeze(url);
         $scope.filters.forEach(function (filter) {
             filter.freeze(url);
+            $scope.photoTaken = 1;
         });
     }
 
@@ -53,17 +56,39 @@ filters.controller('filtersController', ['utils', '$stateParams', '$scope', '$ti
     };
 
     $scope.photo = function () {
-        $scope.webcam.takePhoto().then(setPhoto);
+        if (!$scope.photoTaken) {
+            $scope.webcam.takePhoto().then(setPhoto);
+        } else {
+            init();
+            $scope.photoTaken = 0;
+        }
     };
 
     $timeout(function () {
 
         if (!$stateParams.src) {
             init();
+            $scope.noCamera = 0;
         } else {
-            utils.getImageAsDataURI(decodeURIComponent($stateParams.src)).then(function (url) {
-                setPhoto(url);
-            });
+            if ($stateParams.uri) {
+                $scope.noCamera = 1;
+                setPhoto('blob:' + escape(decodeURIComponent($stateParams.src).replace('blob:', '')));
+            } else {
+                utils.getImageAsDataURI(decodeURIComponent($stateParams.src)).then(function (url) {
+                    $scope.noCamera = 1;
+                    console.error(url);
+                    setPhoto(url);
+                }).catch(function () {
+                    swal({
+                        title: "Cannot load this URL.",
+                        type: "error",
+                        closeOnConfirm: false,
+                        animation: "pop"
+                    }, function () {
+                        $state.go('selector');
+                    });
+                });
+            }
         }
 
     });

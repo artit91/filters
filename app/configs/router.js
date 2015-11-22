@@ -19,7 +19,7 @@ filters.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider
     });
 
     $stateProvider.state('filters', {
-        url: "/filters?src",
+        url: "/filters?src&uri",
         views: {
             'body': {
                 templateUrl: "filters.tpl.html",

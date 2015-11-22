@@ -56,6 +56,7 @@
 
     gulp.task('concat:common_js', function () {
         return gulp.src([
+            'vendor/sweetalert/**/*.js',
             'vendor/canvas-to-blob/**/*.js',
             'vendor/angular/**/*.js',
             'vendor/angular-ui-router/**/*.js',
@@ -85,6 +86,7 @@
 
     gulp.task('copy:chrome_css', function () {
         return gulp.src([
+            'vendor/sweetalert/**/*.css',
             'vendor/angular/angular-csp.css',
             '.tmp/chrome.css'
         ]).pipe(gulp.concat('app.css')).pipe(gulp.dest('chrome-pkg/'));

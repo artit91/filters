@@ -1,26 +1,38 @@
 body {
 	font-family: Arial, sans-serif;
+	background-color: #bada55;
 }
 
 .selector {
 
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: flex;
-	padding: 1vw;
+    flex-wrap: wrap;
+    flex-direction: row;
 
 	&-item span:before {
 		display: block;
-		font-size: 20vw;
+		font-size: 16vw;
 	}
 
 	&-item {
-		width: 33.3333vw;
+		display: flex; 
+	    flex-basis: 50%;  
+	    justify-content: center;
 		text-align: center;
+	    flex-direction: column;
+		width: 50%;
 		font-size: 4vw;
-		color: #bada55;
+		color: white;
 	}
 
 	&-item:hover {
 		opacity: 0.65;
+		background: #a7c44c;
 		cursor: pointer;
 	}
 
