@@ -1,31 +1,27 @@
-/*jslint browser: true, devel: true*/
 /*global filters, swal, chrome, URL, document */
-
-filters.controller('SelectorController', ['$state', '$scope', function ($state, $scope) {
-
-    'use strict';
-
+filters.controller('SelectorController', ['$state', '$scope',
+function ($state, $scope) {
     $scope.getURL = function () {
         $state.$current.locals.overridePaste = 1;
         swal({
-            title: "Insert URL here.",
-            type: "input",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            animation: "pop",
-            inputPlaceholder: "http://lorempixel.com/640/480/people/"
+            'title': 'Insert URL here.',
+            'type': 'input',
+            'showCancelButton': true,
+            'closeOnConfirm': false,
+            'animation': 'pop',
+            'inputPlaceholder': 'http://lorempixel.com/640/480/people/'
         }, function (inputValue) {
             if (inputValue === false) {
                 $state.$current.locals.overridePaste = 0;
                 return false;
             }
-            if (inputValue === "") {
-                swal.showInputError("You need to paste an URL here.");
+            if (inputValue === '') {
+                swal.showInputError('You need to paste an URL here.');
                 return false;
             }
             $state.$current.locals.overridePaste = 0;
             $state.go('filters', {
-                src: inputValue
+                'src': inputValue
             });
         });
     };
@@ -40,8 +36,8 @@ filters.controller('SelectorController', ['$state', '$scope', function ($state, 
             }
             entry.file(function (file) {
                 $state.go('filters', {
-                    src: URL.createObjectURL(file),
-                    uri: true
+                    'src': URL.createObjectURL(file),
+                    'uri': true
                 });
             });
         });
@@ -50,5 +46,4 @@ filters.controller('SelectorController', ['$state', '$scope', function ($state, 
     $scope.getClipboard = function () {
         document.execCommand('paste');
     };
-
 }]);

@@ -1,15 +1,9 @@
-/*jslint devel: true */
 /*global filters, navigator, window*/
-
-filters.factory('webcamService', ["$q", function ($q) {
-
-    'use strict';
-
+filters.factory('webcamService', ['$q', function ($q) {
     var webcam = {},
         webcamURL;
 
     webcam.get = function () {
-
         if (webcamURL) {
             return $q(function (resolve) {
                 resolve(webcamURL);
@@ -17,7 +11,7 @@ filters.factory('webcamService', ["$q", function ($q) {
         }
 
         return $q(function (resolve) {
-            navigator.webkitGetUserMedia({video: true},
+            navigator.webkitGetUserMedia({'video': true},
                 function (stream) {
                     webcamURL = window.URL.createObjectURL(stream);
                     resolve(webcamURL);
@@ -25,7 +19,6 @@ filters.factory('webcamService', ["$q", function ($q) {
                     console.log(err);
                 });
         });
-
     };
 
     return webcam;

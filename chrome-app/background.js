@@ -1,10 +1,5 @@
-/*jslint browser: true, devel: true*/
 /*global chrome */
-
-function init() {
-
-    'use strict';
-
+function init () {
     chrome.app.runtime.onLaunched.addListener(function () {
         chrome.app.window.create('index.html', {
             'id': 'filters',
@@ -16,7 +11,6 @@ function init() {
             }
         });
     });
-
 }
 
 init();
