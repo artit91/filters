@@ -13,5 +13,9 @@
     "minimum_chrome_version": "38.0.2125.101",
     "offline_enabled": true,
     "permissions": ["videoCapture", "fileSystem", "clipboardRead"],
-    "icons": { "48": "ico48.png" }
+    "icons": {
+        "16": "ico16.png",
+        "48": "ico48.png",
+        "128": "ico128.png"
+    }
 }
