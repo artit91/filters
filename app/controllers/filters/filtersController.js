@@ -1,4 +1,4 @@
-/*global filters, swal, escape */
+/*global filters, swal, escape, Image, document, Caman */
 filters.controller('filtersController', [
     'utils',
     '$stateParams',
@@ -41,42 +41,53 @@ filters.controller('filtersController', [
         $scope.image = '';
         $scope.filters = [
             {
-                'name': 'default'
+                'name': 'default',
+                'caman': {}
             },
             {
                 'name': 'OpenMayfair',
-                'contrast': contrast(1.1),
-                'saturation': saturate(1.4)
+                'caman': {
+                    'contrast': contrast(1.1),
+                    'saturation': saturate(1.4)
+                }
             },
             {
                 'name': 'OpenRise',
-                'contrast': contrast(0.8),
-                'saturation': saturate(1.4),
-                'sepia': sepia(0.25),
-                'brightness': brightness(1.1),
-                'hue': hueRotate(-15)
+                'caman': {
+                    'contrast': contrast(0.8),
+                    'saturation': saturate(1.4),
+                    'sepia': sepia(0.25),
+                    'brightness': brightness(1.1),
+                    'hue': hueRotate(-15)
+                }
             },
             {
                 'name': 'OpenValencia',
-                'contrast': contrast(0.9),
-                'saturation': saturate(1.5),
-                'sepia': sepia(0.15)
+                'caman': {
+                    'contrast': contrast(0.9),
+                    'saturation': saturate(1.5),
+                    'sepia': sepia(0.15)
+                }
             },
             {
                 'name': 'OpenHefe',
-                'contrast': contrast(1.3),
-                'saturation': saturate(1.3),
-                'sepia': sepia(0.30),
-                'brightness': brightness(0.95),
-                'hue': hueRotate(-10)
+                'caman': {
+                    'contrast': contrast(1.3),
+                    'saturation': saturate(1.3),
+                    'sepia': sepia(0.30),
+                    'brightness': brightness(0.95),
+                    'hue': hueRotate(-10)
+                }
             },
             {
                 'name': 'OpenNashville',
-                'contrast': contrast(0.9),
-                'saturation': saturate(1.5),
-                'sepia': sepia(0.40),
-                'brightness': brightness(1.1),
-                'hue': hueRotate(-15)
+                'caman': {
+                    'contrast': contrast(0.9),
+                    'saturation': saturate(1.5),
+                    'sepia': sepia(0.40),
+                    'brightness': brightness(1.1),
+                    'hue': hueRotate(-15)
+                }
             }
         ];
 
@@ -109,6 +120,48 @@ filters.controller('filtersController', [
             }
         };
 
+        function caman () {
+            Caman('#canvas', function () {
+                var filter,
+                    i,
+                    that = this;
+
+                for (i = 0; i < $scope.filters.length; i += 1) {
+                    if ($scope.filters[i].name === $scope.selected) {
+                        filter = $scope.filters[i];
+                        break;
+                    }
+                }
+
+                Object.keys(filter.caman).forEach(function (key) {
+                    that[key](filter.caman[key]);
+                });
+
+                that.render(function () {
+                    $state.go('save', {
+                        'src': that.toBase64(),
+                        'original': $scope.image
+                    });
+                });
+            });
+        }
+
+        $scope.save = function () {
+            var image = document.getElementById('canvas');
+
+            if (!image) {
+                image = new Image();
+                document.body.appendChild(image);
+                image.id = 'canvas';
+                image.onload = caman;
+            }
+            if (image.src === $scope.image) {
+                caman();
+            } else {
+                image.src = $scope.image;
+            }
+        };
+
         $timeout(function () {
             if (!$stateParams.src) {
                 init();
@@ -123,7 +176,6 @@ filters.controller('filtersController', [
                     decodeURIComponent($stateParams.src)
                 ).then(function (url) {
                     $scope.noCamera = 1;
-                    console.error(url);
                     setPhoto(url);
                 }).catch(function () {
                     swal({

@@ -49,6 +49,7 @@ gulp.task('concat:common_sass', function () {
 
 gulp.task('concat:common_js', function () {
     return gulp.src([
+        'vendor/caman/**/*.js',
         'vendor/sweetalert/**/*.js',
         'vendor/canvas-to-blob/**/*.js',
         'vendor/angular/**/*.js',

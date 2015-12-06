@@ -15,5 +15,9 @@
 <div class="overlay">
     <span class="overlay-button back ion-ios-arrow-back" ui-sref="selector"></span>
     <span class="overlay-button photo ion-android-camera" ng-click="photo()" ng-class="{'ion-android-camera': !photoTaken, 'ion-refresh': photoTaken}"></span>
-    <span class="overlay-button share ion-share" ng-class="{'no-camera': noCamera}" ng-show="photoTaken"></span>
+    <span
+        class="overlay-button share ion-share"
+        ng-click="save()"
+        ng-class="{'no-camera': noCamera}"
+        ng-show="photoTaken"></span>
 </div>

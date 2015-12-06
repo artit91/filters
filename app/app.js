@@ -28,7 +28,6 @@ function ($provide) {
         if (!$state.$current.locals.overridePaste) {
             if (event.clipboardData.items[0]) {
                 file = event.clipboardData.items[0].getAsFile();
-                console.error(file);
                 if (file && fileTypes.indexOf(
                     file.type.replace('image/', '')) !== -1
                 ) {

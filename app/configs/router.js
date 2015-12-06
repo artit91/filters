@@ -22,4 +22,14 @@ function ($stateProvider, $urlRouterProvider) {
             }
         }
     });
+
+    $stateProvider.state('save', {
+        'url': '/save?src&original',
+        'views': {
+            'body': {
+                'templateUrl': 'save.tpl.html',
+                'controller': 'saveController'
+            }
+        }
+    });
 }]);
