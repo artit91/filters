@@ -8,23 +8,23 @@ filters.controller('filtersController', [
     function (utils, $stateParams, $state, $scope, $timeout) {
         function contrast (cssArg) {
             return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -100 : (cssArg - 1) * 100
+                cssArg < 1 ? (1 - cssArg) * -100 : cssArg * 10
             );
         }
 
         function saturate (cssArg) {
             return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -100 : (cssArg - 1) * 100
+                cssArg < 1 ? (1 - cssArg) * -75 : cssArg * 27.5
             );
         }
 
         function sepia (cssArg) {
-            return Math.round(cssArg * 100);
+            return Math.round(Math.pow(1 + cssArg, 10));
         }
 
         function brightness (cssArg) {
             return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -100 : (cssArg - 1) * 100
+                cssArg < 1 ? (1 - cssArg) * -100 : (cssArg - 1) * 32.5
             );
         }
 
