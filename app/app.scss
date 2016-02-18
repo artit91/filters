@@ -1,88 +1,95 @@
 body {
-	margin: 0;
+    margin: 0;
 }
 
 video {
-	display: block;
-	box-sizing: border-box;
+    display: block;
+    box-sizing: border-box;
 }
 
 .OpenMayfair {
-  -webkit-filter: url('#OpenMayfair');
+    -webkit-filter: url('#OpenMayfair');
 }
 
 .OpenNashville {
-  -webkit-filter: url('#OpenNashville');
+    -webkit-filter: url('#OpenNashville');
 }
 
 .OpenHefe {
-  -webkit-filter: url('#OpenHefe');
+    -webkit-filter: url('#OpenHefe');
 }
 
 .OpenRise {
-  -webkit-filter: url('#OpenRise');
+    -webkit-filter: url('#OpenRise');
 }
 
 .OpenValencia {
-  -webkit-filter: url('#OpenValencia');
+    -webkit-filter: url('#OpenValencia');
 }
 
 .sweet-alert {
-	.confirm  {
-		box-shadow: rgba(186, 218, 85, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
-    	background-color: rgb(186, 218, 85) !important;
-    	&:hover {
-    		background-color: #a7c44c !important;
-    	}
-    	&:focus {
-    		box-shadow: 0 0 2px rgba(186, 218, 85, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
-    	}
-    	&:active {
-    		background-color: #94ae44 !important;
-    	}
-	}
+    .confirm  {
+        box-shadow: rgba(186, 218, 85, 0.8) 0px 0px 2px,
+                    rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset
+                    !important;
+        background-color: rgb(186, 218, 85) !important;
+
+        &:hover {
+            background-color: #a7c44c !important;
+        }
+
+        &:focus {
+            box-shadow: 0 0 2px rgba(186, 218, 85, 0.5),
+                        inset 0 0 0 1px rgba(0, 0, 0, 0.05)
+                        !important;
+        }
+
+        &:active {
+            background-color: #94ae44 !important;
+        }
+    }
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
 
-  &-button {
-      text-align: center;
-      width: 10vw;
-      line-height: 10vw;
-      display: block;
-      font-size: 8vw;
-      color: white;
-      background-color: #bada55;
-      border-radius: 2vw;
-      position: absolute;
-      top: 5vw;
-      opacity: 0.85;
+    &-button {
+        text-align: center;
+        width: 10vw;
+        line-height: 10vw;
+        display: block;
+        font-size: 8vw;
+        color: white;
+        background-color: #bada55;
+        border-radius: 2vw;
+        position: absolute;
+        top: 5vw;
+        opacity: 0.85;
 
-      &.back {
-        left: 5vw;
-      }
+        &.back {
+            left: 5vw;
+        }
 
-      &.right-1, &.right-2, &.right-3 {
-        right: 5vw;
-      }
+        &.right-1, &.right-2, &.right-3 {
+            right: 5vw;
+        }
 
-      &.right-2 {
-        top: 17.5vw;
-      }
+        &.right-2 {
+            top: 17.5vw;
+        }
 
-      &.right-3 {
-        top: 30vw;
-      }
-  }
+        &.right-3 {
+            top: 30vw;
+        }
+    }
 
-  &-button:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+    &-button:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
 }
