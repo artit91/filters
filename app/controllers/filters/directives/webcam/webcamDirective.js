@@ -13,6 +13,12 @@ function (webcamService, $q) {
                 });
             };
 
+            $scope.model.destroy = function () {
+                $element[0].pause();
+                $element[0].src = '';
+                webcamService.destroy();
+            };
+
             $scope.model.takePhoto = function () {
                 return $q(function (resolve) {
                     var canvas = document.createElement('canvas'),

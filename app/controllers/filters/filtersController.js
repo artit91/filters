@@ -9,7 +9,8 @@ filters.controller('filtersController', [
     function (utils, $templateCache, $stateParams, $state, $scope, $timeout) {
         var filterTemplate = $templateCache.get('filterTemplate.tpl.html');
 
-        $scope.selected = 'default';
+        $scope.filterTemplate = filterTemplate;
+        $scope.selected = $stateParams.filter;
         $scope.photoTaken = 0;
         $scope.noCamera = 0;
         $scope.webcam = {};
@@ -40,6 +41,13 @@ filters.controller('filtersController', [
             $scope.webcam.init();
             $scope.filters.forEach(function (filter) {
                 filter.init();
+            });
+        }
+
+        function destroy () {
+            $scope.webcam.destroy();
+            $scope.filters.forEach(function (filter) {
+                filter.destroy();
             });
         }
 
@@ -96,6 +104,14 @@ filters.controller('filtersController', [
                     imageData.height
                 );
 
+                if ($scope.selected === 'default') {
+                    return $state.go('save', {
+                        'src': imageData.url,
+                        'original': $scope.image,
+                        'filter': $scope.selected
+                    });
+                }
+
                 utils.svgToPng(
                     svg,
                     imageData.width,
@@ -103,7 +119,8 @@ filters.controller('filtersController', [
                 ).then(function (dataURI) {
                     $state.go('save', {
                         'src': dataURI,
-                        'original': $scope.image
+                        'original': $scope.image,
+                        'filter': $scope.selected
                     });
                 });
             });
@@ -115,13 +132,9 @@ filters.controller('filtersController', [
                 $scope.noCamera = 0;
             } else if ($stateParams.uri) {
                 $scope.noCamera = 1;
-                setPhoto('blob:' + escape(
-                    decodeURIComponent($stateParams.src).replace('blob:', ''))
-                );
+                setPhoto($stateParams.src);
             } else {
-                utils.getImageAsDataURI(
-                    decodeURIComponent($stateParams.src)
-                ).then(function (url) {
+                utils.getImageAsDataURI($stateParams.src).then(function (url) {
                     $scope.noCamera = 1;
                     setPhoto(url);
                 }).catch(function () {
@@ -137,6 +150,10 @@ filters.controller('filtersController', [
             }
         });
 
-        $scope.filterTemplate = filterTemplate;
+        $scope.$on('$destroy', function () {
+            if (!$stateParams.src) {
+                destroy();
+            }
+        });
     }
 ]);

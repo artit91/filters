@@ -2,5 +2,7 @@
 	<save-file class="save-file" ng-model="image"></save-file>
 </div>
 <div class="overlay">
-    <span class="overlay-button back ion-ios-arrow-back" ui-sref="selector"></span>
+    <span class="overlay-button back ion-ios-arrow-back" ng-click="back()"></span>
+    <span class="overlay-button right-1 ion-document" ng-click="save()"></span>
+    <span class="overlay-button right-2 ion-android-open" ng-click="open()"></span>
 </div>

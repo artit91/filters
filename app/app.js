@@ -21,7 +21,6 @@ function ($provide) {
                 'jpg',
                 'jpeg',
                 'png',
-                'svg',
                 'bmp'
             ];
 

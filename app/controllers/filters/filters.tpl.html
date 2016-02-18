@@ -14,11 +14,11 @@
 </div>
 <div class="overlay">
     <span class="overlay-button back ion-ios-arrow-back" ui-sref="selector"></span>
-    <span class="overlay-button photo ion-android-camera" ng-click="photo()" ng-class="{'ion-android-camera': !photoTaken, 'ion-refresh': photoTaken}"></span>
+    <span class="overlay-button right-1 ion-android-camera" ng-click="photo()" ng-class="{'ion-android-camera': !photoTaken, 'ion-refresh': photoTaken}"></span>
     <span
-        class="overlay-button share ion-share"
+        class="overlay-button ion-share"
         ng-click="save()"
-        ng-class="{'no-camera': noCamera}"
+        ng-class="{'right-1': noCamera, 'right-2': !noCamera}"
         ng-show="photoTaken"></span>
 </div>
 

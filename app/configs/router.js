@@ -14,7 +14,12 @@ function ($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('filters', {
-        'url': '/filters?src&uri',
+        'url': '/filters',
+        'params': {
+            'src': null,
+            'uri': 0,
+            'filter': 'default'
+        },
         'views': {
             'body': {
                 'templateUrl': 'filters.tpl.html',
@@ -24,7 +29,12 @@ function ($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('save', {
-        'url': '/save?src&original',
+        'url': '/save',
+        'params': {
+            'src': null,
+            'original': null,
+            'filter': 'default'
+        },
         'views': {
             'body': {
                 'templateUrl': 'save.tpl.html',

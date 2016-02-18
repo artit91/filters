@@ -1,6 +1,28 @@
-/*global filters, URL, XMLHttpRequest, Image, document, btoa*/
+/*global filters, URL, XMLHttpRequest, Image, document, btoa, atob, Blob*/
 filters.factory('utils', ['$q', function ($q) {
     var utils = {};
+
+    utils.dataURItoBlob = function (dataURI) {
+        var byteString,
+            mimeString,
+            ia,
+            i;
+
+        if (dataURI.split(',')[0].indexOf('base64') >= 0) {
+            byteString = atob(dataURI.split(',')[1]);
+        } else {
+            byteString = unescape(dataURI.split(',')[1]);
+        }
+
+        mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        ia = new Uint8Array(byteString.length);
+        for (i = 0; i < byteString.length; i += 1) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], {'type': mimeString});
+    };
 
     utils.getImageAsDataURI = function (url) {
         return $q(function (resolve, reject) {
@@ -9,6 +31,14 @@ filters.factory('utils', ['$q', function ($q) {
             xhr.open('GET', url, true);
             xhr.responseType = 'blob';
             xhr.onload = function () {
+                if ([
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/bmp'
+                ].indexOf(this.response.type) === -1) {
+                    return reject('Unsupported response type');
+                }
                 resolve(URL.createObjectURL(this.response));
             };
             xhr.onerror = function (err) {
