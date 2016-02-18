@@ -8,23 +8,23 @@ video {
 }
 
 .OpenMayfair {
-	-webkit-filter: saturate(1.4) contrast(1.1);
+  -webkit-filter: url('#OpenMayfair');
 }
 
 .OpenNashville {
-  	-webkit-filter: sepia(0.4) saturate(1.5) contrast(0.9) brightness(1.1) hue-rotate(-15deg);
+  -webkit-filter: url('#OpenNashville');
 }
 
 .OpenHefe {
-  	-webkit-filter: contrast(1.3) sepia(0.3) saturate(1.3) hue-rotate(-10deg) brightness(0.95);
+  -webkit-filter: url('#OpenHefe');
 }
 
 .OpenRise {
-  	-webkit-filter: saturate(1.4) sepia(0.25) hue-rotate(-15deg) contrast(0.8) brightness(1.1);
+  -webkit-filter: url('#OpenRise');
 }
 
 .OpenValencia {
-  	-webkit-filter: sepia(0.15) saturate(1.5) contrast(0.9);
+  -webkit-filter: url('#OpenValencia');
 }
 
 .sweet-alert {

@@ -19,6 +19,7 @@
 		background: black;
 		object-fit: contain;
 		flex-grow: 1;
+		flex-shrink: 1;
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -27,6 +28,8 @@
 	.filter-cont {
 		display: flex;
 		z-index: 2;
+		flex-grow: 0;
+		flex-shrink: 0;
 	}
 
 	.filter {

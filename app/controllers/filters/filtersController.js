@@ -1,93 +1,38 @@
-/*global filters, swal, escape, Image, document, Caman */
+/*global filters, swal, escape */
 filters.controller('filtersController', [
     'utils',
+    '$templateCache',
     '$stateParams',
     '$state',
     '$scope',
     '$timeout',
-    function (utils, $stateParams, $state, $scope, $timeout) {
-        function contrast (cssArg) {
-            return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -100 : cssArg * 10
-            );
-        }
-
-        function saturate (cssArg) {
-            return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -75 : cssArg * 27.5
-            );
-        }
-
-        function sepia (cssArg) {
-            return Math.round(Math.pow(1 + cssArg, 10));
-        }
-
-        function brightness (cssArg) {
-            return Math.round(
-                cssArg < 1 ? (1 - cssArg) * -100 : (cssArg - 1) * 32.5
-            );
-        }
-
-        function hueRotate (cssArg) {
-            return Math.round(
-                (((360 + cssArg) % 360) / 360) * 100
-            );
-        }
+    function (utils, $templateCache, $stateParams, $state, $scope, $timeout) {
+        var filterTemplate = $templateCache.get('filterTemplate.tpl.html');
 
         $scope.selected = 'default';
         $scope.photoTaken = 0;
         $scope.noCamera = 0;
         $scope.webcam = {};
         $scope.image = '';
+
         $scope.filters = [
             {
-                'name': 'default',
-                'caman': {}
+                'name': 'default'
             },
             {
-                'name': 'OpenMayfair',
-                'caman': {
-                    'contrast': contrast(1.1),
-                    'saturation': saturate(1.4)
-                }
+                'name': 'OpenMayfair'
             },
             {
-                'name': 'OpenRise',
-                'caman': {
-                    'contrast': contrast(0.8),
-                    'saturation': saturate(1.4),
-                    'sepia': sepia(0.25),
-                    'brightness': brightness(1.1),
-                    'hue': hueRotate(-15)
-                }
+                'name': 'OpenRise'
             },
             {
-                'name': 'OpenValencia',
-                'caman': {
-                    'contrast': contrast(0.9),
-                    'saturation': saturate(1.5),
-                    'sepia': sepia(0.15)
-                }
+                'name': 'OpenValencia'
             },
             {
-                'name': 'OpenHefe',
-                'caman': {
-                    'contrast': contrast(1.3),
-                    'saturation': saturate(1.3),
-                    'sepia': sepia(0.30),
-                    'brightness': brightness(0.95),
-                    'hue': hueRotate(-10)
-                }
+                'name': 'OpenHefe'
             },
             {
-                'name': 'OpenNashville',
-                'caman': {
-                    'contrast': contrast(0.9),
-                    'saturation': saturate(1.5),
-                    'sepia': sepia(0.40),
-                    'brightness': brightness(1.1),
-                    'hue': hueRotate(-15)
-                }
+                'name': 'OpenNashville'
             }
         ];
 
@@ -120,46 +65,48 @@ filters.controller('filtersController', [
             }
         };
 
-        function caman () {
-            Caman('#canvas', function () {
-                var filter,
-                    i,
-                    that = this;
+        $scope.save = function () {
+            utils.getImageData($scope.image).then(function (imageData) {
+                var svg,
+                    image = [
+                        '<image y="0" x="0" ',
+                        'xlink:href="',
+                        imageData.url,
+                        '" ',
+                        'preserveAspectRatio="none" ',
+                        'height="',
+                        imageData.height,
+                        '" ',
+                        'width="',
+                        imageData.width,
+                        '" ',
+                        'style="filter:url(#',
+                        $scope.selected,
+                        ')" />'
+                    ].join('');
 
-                for (i = 0; i < $scope.filters.length; i += 1) {
-                    if ($scope.filters[i].name === $scope.selected) {
-                        filter = $scope.filters[i];
-                        break;
-                    }
-                }
+                svg = filterTemplate.replace(
+                    '{{image}}',
+                    image
+                ).replace(
+                    '{{width}}',
+                    imageData.width
+                ).replace(
+                    '{{height}}',
+                    imageData.height
+                );
 
-                Object.keys(filter.caman).forEach(function (key) {
-                    that[key](filter.caman[key]);
-                });
-
-                that.render(function () {
+                utils.svgToPng(
+                    svg,
+                    imageData.width,
+                    imageData.height
+                ).then(function (dataURI) {
                     $state.go('save', {
-                        'src': that.toBase64(),
+                        'src': dataURI,
                         'original': $scope.image
                     });
                 });
             });
-        }
-
-        $scope.save = function () {
-            var image = document.getElementById('canvas');
-
-            if (!image) {
-                image = new Image();
-                document.body.appendChild(image);
-                image.id = 'canvas';
-                image.onload = caman;
-            }
-            if (image.src === $scope.image) {
-                caman();
-            } else {
-                image.src = $scope.image;
-            }
         };
 
         $timeout(function () {
@@ -189,5 +136,7 @@ filters.controller('filtersController', [
                 });
             }
         });
+
+        $scope.filterTemplate = filterTemplate;
     }
 ]);
