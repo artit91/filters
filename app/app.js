@@ -8,7 +8,7 @@ function ($provide) {
 }]).run(['$state', function ($state) {
     function showAlert () {
         swal({
-            'title': 'Your clipboard does not contain an image.',
+            'title': 'Your clipboard does not contain any images.',
             'type': 'error',
             'closeOnConfirm': false,
             'animation': 'pop'
