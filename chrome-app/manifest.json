@@ -7,7 +7,8 @@
     "author": "Attila Varga <artit91@gmail.com>",
     "app": {
         "background": {
-            "scripts": ["background.js"]
+            "scripts": ["background.js"],
+            "persistent": false
         }
     },
     "minimum_chrome_version": "38.0.2125.101",
