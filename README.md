@@ -1,7 +1,7 @@
 [![available in the chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png "available in the chrome web store")](https://chrome.google.com/webstore/detail/filters/ijfcdfpicjngdgndaaejannimmhhbggj)
 
 
-#installing filters
+#installing Filters
 
 1. install node
 ---------------
@@ -15,7 +15,7 @@ https://github.com/joyent/node/wiki/installing-node.js-via-package-manager
 --------------
 http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-4. get filters
+4. get Filters
 ----------------
 `git clone https://github.com/artit91/filters.git`
 
